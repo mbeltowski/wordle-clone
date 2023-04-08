@@ -18,7 +18,8 @@ const Board = () => {
 		const response = await fetch(`https://random-word-api.vercel.app/api?words=1&length=${gameConfig.INPUT_COLS}`)
 		const data = await response.json()
 		console.log(data[0])
-		setGuess(data[0].split(""))
+		// setGuess(data[0].split(""))
+		setGuess("lumpy".split(""))
 	}
 
 	useEffect(() => {
@@ -28,25 +29,14 @@ const Board = () => {
 	const checkUserGuess = (rowIndex: number) => {
 		const userGuess = guesses[rowIndex]
 		const comparedLetters = Array(gameConfig.INPUT_ROWS - 1).fill(undefined) as (undefined | "correct" | "wrongPlace" | "wrong")[]
-		console.log(comparedLetters)
-		userGuess.map((userLetter, userIndex) => {
-			if (comparedLetters[userIndex] == undefined) {
-				guess.map((guessLetter, guessIndex) => {
-					console.log(userIndex, userLetter, guessLetter, guessIndex)
-					if (userLetter == guessLetter) {
-						if (userIndex == guessIndex) comparedLetters[userIndex] = "correct"
-						else comparedLetters[userIndex] = "wrongPlace"
-					} else {
-						comparedLetters[userIndex] = "wrong"
-					}
-				})
-			}
+
+		userGuess.map((letter, index) => {
+			if (letter === guess[index]) comparedLetters[index] = "correct"
+			else if (guess.includes(letter)) comparedLetters[index] = "wrongPlace"
+			else comparedLetters[index] = "wrong"
 		})
 
-		console.log(comparedLetters)
-
 		comparedLetters.map((letter, index) => {
-			// console.log(`${rowIndex}-${index}`)
 			const input = document.getElementById(`${rowIndex}-${index}`) as HTMLInputElement
 			if (input == null) return
 			if (letter == "correct") input.style.backgroundColor = "green"
@@ -56,14 +46,19 @@ const Board = () => {
 	}
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, colIndex: number, rowIndex: number) => {
+		if (rowIndex > 0 && guesses[rowIndex - 1].join("").length < 5) return
+		if (colIndex > 0 && guesses[rowIndex][colIndex - 1] === "") return
 		const key = e.key
 		let nextInput = undefined
 		const newGuesses = [...guesses]
-		console.log(colIndex, rowIndex)
+
 		if (/^[a-z]$/.test(key)) {
 			newGuesses[rowIndex][colIndex] = key.toLowerCase()
 			nextInput = document.getElementById(`${rowIndex}-${colIndex + 1}`) as HTMLInputElement
 		} else if (key === "Backspace") {
+			if (newGuesses[rowIndex][colIndex + 1] && newGuesses[rowIndex][colIndex + 1] !== "") return
+			if (newGuesses[rowIndex][colIndex] === "") newGuesses[rowIndex][colIndex - 1] = ""
+
 			newGuesses[rowIndex][colIndex] = ""
 			nextInput = document.getElementById(`${rowIndex}-${colIndex - 1}`) as HTMLInputElement
 		} else if (key === "Enter" && colIndex == gameConfig.INPUT_COLS - 1) {
