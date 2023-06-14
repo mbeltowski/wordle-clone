@@ -1,36 +1,33 @@
-import { Box } from "@mui/material"
+import { Box, CircularProgress } from "@mui/material"
+
 import Board from "Components/Board/Board"
-import Keyboard from "Components/Keyboard/Keyboard"
 import GameData from "Config/Models/GameData"
+import { initialGameData } from "Config/gameConfig"
 import { useEffect, useState } from "react"
 import "./style/style.css"
 
 const Game = () => {
-	const [gameData, setGameData] = useState<GameData>({
-		game: {
-			userTries: [],
-			word: "",
-			finished: false
-		},
-		lastWord: "",
-		lastWordAttempts: 0,
-		streak: 0
-	})
-
-	const loadGame = async () => {
-		const storageData = await localStorage.getItem("gameData")
-		if (storageData === null) return
-		await setGameData(JSON.parse(storageData) as GameData)
-	}
+	const [gameData, setGameData] = useState<GameData>()
 
 	useEffect(() => {
-		loadGame()
+		// JSON.parse(localStorage.getItem("gameData")) || initialGameData
+
+		const storageData = localStorage.getItem("gameData")
+
+		if (storageData !== null) {
+			setGameData(JSON.parse(storageData)!)
+			console.log("STORAGE DATA NOT NULL", JSON.parse(storageData))
+		} else {
+			setGameData(initialGameData)
+		}
+		// console.log(gameData)
 	}, [])
 
 	return (
 		<Box className='game-container' sx={{ bgcolor: "primary.main", color: "white" }}>
-			<Board data={gameData} />
-			<Keyboard />
+			{gameData === undefined ? <CircularProgress color='secondary' size={64} sx={{ marginTop: 20 }} /> : <Board data={gameData} />}
+
+			{/* <Keyboard /> */}
 		</Box>
 	)
 }

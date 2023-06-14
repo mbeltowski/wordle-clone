@@ -4,10 +4,10 @@ import { gameConfig } from "Config/gameConfig"
 import { useEffect, useState } from "react"
 import "./style/style.css"
 
-const colors = {
-	["correct"]: "green",
-	["wrongPlace"]: "purple",
-	["wrong"]: "red"
+enum colors {
+	"correct" = "green",
+	"wrongPlace" = "purple",
+	"wrong" = "red"
 }
 
 const Board = (props: any) => {
@@ -24,7 +24,6 @@ const Board = (props: any) => {
 	const fetchWords = async () => {
 		const response = await fetch(`https://random-word-api.vercel.app/api?words=1&length=${gameConfig.INPUT_COLS}`)
 		const data = await response.json()
-		console.log(data[0])
 		setGuess(data[0].split(""))
 	}
 
@@ -36,14 +35,14 @@ const Board = (props: any) => {
 				const input = document.getElementById(`${index}-${index2}`)!
 				if (letter === remainingLetters[index2]) {
 					remainingLetters[index2] = ""
-					input.style.backgroundColor = colors["correct"]
+					input.style.backgroundColor = colors.correct
 				} else {
 					const remainingIndex = remainingLetters.indexOf(letter)
 					if (remainingIndex !== -1) {
 						remainingLetters[remainingIndex] = ""
-						input.style.backgroundColor = colors["wrongPlace"]
+						input.style.backgroundColor = colors.wrongPlace
 					} else {
-						input.style.backgroundColor = colors["wrong"]
+						input.style.backgroundColor = colors.wrong
 					}
 				}
 			})
@@ -51,18 +50,24 @@ const Board = (props: any) => {
 	}
 
 	const loadGame = () => {
-		if (data.game.word === "") fetchWords()
-		else setGuess(data.game.word.split(""))
-		setTimeout(() => {
-			// console.log()
-			console.log(data.game.userTries)
-		}, 1000)
-		setUserGuesses(data.game.userTries)
+		console.log("loadgame", props)
+		if (data !== null && data?.game?.word === "") {
+			fetchWords()
+		} else {
+			setGuess(data.game?.word.split(""))
+			setUserGuesses(data.game.userTries)
+		}
+		console.log("guess", guess)
+		// setTimeout(() => {
+		// 	// console.log()
+		// 	console.log(data.game.userTries)
+		// }, 1000)
 		loadInputStyles()
 	}
 
 	useEffect(() => {
 		loadGame()
+		// console.log(data.game.word)
 	}, [])
 
 	const checkUserGuess = (rowIndex: number) => {
@@ -113,9 +118,11 @@ const Board = (props: any) => {
 					</Alert>
 				</Modal>
 			)}
+			{guess}
 			{userGuesses.map((row, rowIndex) => (
 				<div className='board-row' key={rowIndex}>
 					{row.map((col, colIndex) => (
+						// <p key={colIndex}>aa</p>
 						<input type='text' className='board-col' id={`${rowIndex}-${colIndex}`} key={`${rowIndex}-${colIndex}`} value={userGuesses[rowIndex][colIndex]} maxLength={1} onKeyDown={(e) => handleKeyDown(e, colIndex, rowIndex)} />
 					))}
 				</div>
