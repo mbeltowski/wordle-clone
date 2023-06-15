@@ -28,7 +28,6 @@ const Board = (props: any) => {
 	}
 
 	const loadInputStyles = () => {
-		console.log(userGuesses)
 		userGuesses.map((word, wordIndex) => {
 			const remainingLetters = [...guess]
 
@@ -53,7 +52,6 @@ const Board = (props: any) => {
 	}
 
 	const loadGame = () => {
-		console.log("loadgame", props)
 		if (data !== null && data?.game?.word === "") {
 			fetchWords()
 		} else {
@@ -81,10 +79,14 @@ const Board = (props: any) => {
 			setIsGameFinished(true)
 			data.game.finished = true
 			data.lastWord = guess.join("")
-			// data.lastWordAttempts = userGuesses
+			console.log(userGuesses, userGuesses.length)
+
+			data.lastWordAttempts = userGuesses.filter((guess) => Array.isArray(guess) && guess.every((letter) => letter !== "")).length
 
 			const historyDataJson = localStorage.getItem("gameHistory")
-			const historyData: Array<object | any> = JSON.parse(historyDataJson || "") || []
+			const historyData: Array<object | any> = JSON.parse(historyDataJson || "[]") || []
+
+			console.log(historyData)
 
 			historyData.push(data)
 
