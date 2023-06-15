@@ -10,17 +10,13 @@ const Game = () => {
 	const [gameData, setGameData] = useState<GameData>()
 
 	useEffect(() => {
-		// JSON.parse(localStorage.getItem("gameData")) || initialGameData
-
 		const storageData = localStorage.getItem("gameData")
 
 		if (storageData !== null) {
 			setGameData(JSON.parse(storageData)!)
-			console.log("STORAGE DATA NOT NULL", JSON.parse(storageData))
 		} else {
 			setGameData(initialGameData)
 		}
-		// console.log(gameData)
 	}, [])
 
 	return (

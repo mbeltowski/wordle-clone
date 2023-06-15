@@ -28,13 +28,16 @@ const Board = (props: any) => {
 	}
 
 	const loadInputStyles = () => {
-		userGuesses.map((el, index) => {
+		console.log(userGuesses)
+		userGuesses.map((word, wordIndex) => {
 			const remainingLetters = [...guess]
-			if (el.every((elem) => elem === "")) return
-			el.map((letter, index2) => {
-				const input = document.getElementById(`${index}-${index2}`)!
-				if (letter === remainingLetters[index2]) {
-					remainingLetters[index2] = ""
+
+			if (word.every((elem) => elem === "")) return
+
+			word.map((letter, letterIndex) => {
+				const input = document.getElementById(`${wordIndex}-${letterIndex}`)!
+				if (letter === remainingLetters[letterIndex]) {
+					remainingLetters[letterIndex] = ""
 					input.style.backgroundColor = colors.correct
 				} else {
 					const remainingIndex = remainingLetters.indexOf(letter)
@@ -57,18 +60,15 @@ const Board = (props: any) => {
 			setGuess(data.game?.word.split(""))
 			setUserGuesses(data.game.userTries)
 		}
-		console.log("guess", guess)
-		// setTimeout(() => {
-		// 	// console.log()
-		// 	console.log(data.game.userTries)
-		// }, 1000)
-		loadInputStyles()
 	}
 
 	useEffect(() => {
 		loadGame()
-		// console.log(data.game.word)
 	}, [])
+
+	useEffect(() => {
+		loadInputStyles()
+	}, [guess])
 
 	const checkUserGuess = (rowIndex: number) => {
 		loadInputStyles()
@@ -80,6 +80,15 @@ const Board = (props: any) => {
 			setAlertVisibility(true)
 			setIsGameFinished(true)
 			data.game.finished = true
+			data.lastWord = guess.join("")
+			// data.lastWordAttempts = userGuesses
+
+			const historyDataJson = localStorage.getItem("gameHistory")
+			const historyData: Array<object | any> = JSON.parse(historyDataJson || "") || []
+
+			historyData.push(data)
+
+			localStorage.setItem("gameHistory", JSON.stringify(historyData))
 		}
 
 		localStorage.setItem("gameData", JSON.stringify(data))
