@@ -121,7 +121,7 @@ const Board = (props: any) => {
 	}
 
 	return (
-		<div className='board-container'>
+		<div className='board__container'>
 			{isGameFinished && alertVisibility && (
 				<Modal open={true} className='game-modal'>
 					<Alert severity='success' closeText='close' className='game-modal__alert' onClose={() => {}}>
@@ -131,10 +131,10 @@ const Board = (props: any) => {
 			)}
 			{guess}
 			{userGuesses.map((row, rowIndex) => (
-				<div className='board-row' key={rowIndex}>
+				<div className='board__row' key={rowIndex}>
 					{row.map((col, colIndex) => (
 						// <p key={colIndex}>aa</p>
-						<input type='text' className='board-col' id={`${rowIndex}-${colIndex}`} key={`${rowIndex}-${colIndex}`} value={userGuesses[rowIndex][colIndex]} maxLength={1} onKeyDown={(e) => handleKeyDown(e, colIndex, rowIndex)} />
+						<input type='text' className='board__col' id={`${rowIndex}-${colIndex}`} key={`${rowIndex}-${colIndex}`} value={userGuesses[rowIndex][colIndex]} maxLength={1} onKeyDown={(e) => handleKeyDown(e, colIndex, rowIndex)} />
 					))}
 				</div>
 			))}

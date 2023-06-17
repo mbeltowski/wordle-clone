@@ -17,6 +17,7 @@
 }
 .header-container__title {
   padding-left: 2rem;
+  text-decoration: none;
 }
 .header-container__title:hover {
   cursor: pointer;
@@ -28,4 +29,9 @@
 }
 .header-container__icon-box > *:hover {
   cursor: pointer;
+}
+
+.link-reset {
+  text-decoration: none;
+  color: inherit;
 }

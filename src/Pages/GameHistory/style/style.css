@@ -1,0 +1,29 @@
+.history__container {
+  height: 100%;
+  min-height: 92vh;
+  width: 100vw;
+  border: 1px solid black;
+}
+.history__container__single-game {
+  height: 150px;
+  background-color: rgba(18, 15, 15, 0.458);
+  box-shadow: 0px 0px 16px 1px rgb(40, 40, 46);
+  border-radius: 10%;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  gap: 1rem;
+}
+.history__container__single-game__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.history__container__single-game p {
+  font-size: 1.3rem;
+}
