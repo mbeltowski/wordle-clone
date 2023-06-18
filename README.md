@@ -1,46 +1,21 @@
-# Getting Started with Create React App
+### Work still in progress :)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## wordle-clone - general info (![image](https://user-images.githubusercontent.com/72217754/229490872-1ade52dd-d541-4ae9-90bb-06650ec33129.png))
+wordle-clone, as name says, is web game based on original wordle game - as user enters page, random word is fetched from public API - and user has to guess the word by typing letter. Game UI shows whether user entered letter contained by word and if it is in right place.
 
-## Available Scripts
+## wordle-clone - podstawowe informacje (![image](https://user-images.githubusercontent.com/72217754/229490912-e4dd8ea8-c91d-408a-b95c-d96d2bb40a83.png))
+wordle-clone, jak sama nazwa wskazuje, to gra internetowa oparta na origynalnym "wordle" - gdy użytkownik wejdzie na stronę, losowe słowo jest pobierane z API i użytkownik musi zgadnąć jakie słowo zostało mu wylosowane. Interfejs gry jest intuicyjne - pokazuje, czy wpisano poprawne literki i czy są w dobrym miejscu.
 
-In the project directory, you can run:
+## gotU - how to test the app (![image](https://user-images.githubusercontent.com/72217754/229490872-1ade52dd-d541-4ae9-90bb-06650ec33129.png))
+  Live demo is avaiable on https://mbeltowski-wordleclone.netlify.app
 
-### `npm start`
+## wordle-clone - jak przetestować aplikację (![image](https://user-images.githubusercontent.com/72217754/229490912-e4dd8ea8-c91d-408a-b95c-d96d2bb40a83.png))
+  Demo jest dostępne na stronie https://mbeltowski-wordleclone.netlify.app
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Stack
+### Front-end
+  * React
+  * Typescript
+  * Material UI
+  * SCSS
+  * React Router DOM
