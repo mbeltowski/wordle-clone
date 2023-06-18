@@ -30,7 +30,7 @@ const GameHistory = () => {
 							<div className='history__container__single-game'>
 								<div className='history__container__single-game__header'>
 									<Avatar>S</Avatar>
-									<p>{gameFromHistory.game.word}yyy</p>
+									<p>{gameFromHistory.game.word}</p>
 									<div className='history__container__single-game__header__game-state'>win!</div>
 								</div>
 								<div className='history__container__single-game__other-data'>

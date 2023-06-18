@@ -3,6 +3,7 @@ export default interface GameData {
 		userTries: string[][]
 		word: string
 		finished: boolean
+		attempts: number
 	}
 	lastWord: string
 	lastWordAttempts: number

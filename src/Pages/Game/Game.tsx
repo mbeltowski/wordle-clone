@@ -15,7 +15,7 @@ const Game = () => {
 		if (storageData !== null) {
 			setGameData(JSON.parse(storageData)!)
 		} else {
-			setGameData(initialGameData)
+			setGameData({ ...initialGameData })
 		}
 	}, [])
 
