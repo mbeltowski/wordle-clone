@@ -75,17 +75,14 @@ const Board = (props: any) => {
 			newGameData.lastWordAttempts = newGameData.game.attempts
 			newGameData.streak = newGameData.streak + 1
 
-			console.log(newGameData)
-
 			const historyDataJson = localStorage.getItem("gameHistory")
 			const historyData: Array<object | any> = JSON.parse(historyDataJson || "[]") || []
 
 			historyData.push(newGameData)
 			localStorage.setItem("gameHistory", JSON.stringify(historyData))
 		}
-		console.log("new game data before setgamedata", newGameData)
+
 		setGameData({ ...newGameData })
-		console.log("gamedata after set", gameData)
 	}
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, colIndex: number, rowIndex: number) => {
@@ -124,7 +121,7 @@ const Board = (props: any) => {
 
 	useEffect(() => {
 		if (isGameLoaded) loadInputStyles(gameData)
-	}, [gameData, isGameLoaded])
+	}, [gameData.game.word, isGameLoaded])
 
 	return (
 		<div className='board__container'>

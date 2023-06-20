@@ -13,8 +13,6 @@ const GameHistory = () => {
 		const game: GamesHistory = JSON.parse(gameHistoryData)
 
 		setHistory(game)
-
-		console.log("aaa", game[1])
 	}
 
 	useEffect(() => {
