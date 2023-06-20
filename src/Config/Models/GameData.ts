@@ -4,6 +4,7 @@ export default interface GameData {
 		word: string
 		finished: boolean
 		attempts: number
+		finishDate: Date | null
 	}
 	lastWord: string
 	lastWordAttempts: number

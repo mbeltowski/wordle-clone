@@ -25,8 +25,8 @@ const GameHistory = () => {
 		<Box className='history__container' sx={{ bgcolor: "primary.main", color: "white" }}>
 			<Grid item container spacing={2} columnSpacing={{ xs: 2, sm: 6, md: 1 }}>
 				{history.length > 0 &&
-					history.map((gameFromHistory) => (
-						<Grid item className='history__container__games' xs={12} sm={6} md={4} lg={3} xl={2}>
+					history.map((gameFromHistory, index) => (
+						<Grid item key={index} className='history__container__games' xs={12} sm={6} md={4} lg={3} xl={2}>
 							<div className='history__container__single-game'>
 								<div className='history__container__single-game__header'>
 									<Avatar>S</Avatar>

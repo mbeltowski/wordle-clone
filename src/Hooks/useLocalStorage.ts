@@ -10,12 +10,13 @@ export const useLocalStorage = <T>(key: string, initialValue: T): UseLocalStorag
 
 	const setValue = (value: T) => {
 		setStoredValue(value)
-		localStorage.setItem(key, JSON.stringify(value))
+		// localStorage.setItem(key, JSON.stringify(value))
 	}
 
 	useEffect(() => {
+		// console.log("use effec in uselocalstorage", storedValue)
 		localStorage.setItem(key, JSON.stringify(storedValue))
 	}, [storedValue])
 
-	return [storedValue, setStoredValue] as UseLocalStorageReturnType<T> // Type assertion
+	return [storedValue, setValue] as UseLocalStorageReturnType<T>
 }
