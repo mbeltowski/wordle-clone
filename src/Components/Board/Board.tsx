@@ -117,10 +117,12 @@ const Board = (props: any) => {
 
 	useEffect(() => {
 		loadGame(false)
+		// eslint-disable-next-line
 	}, [])
 
 	useEffect(() => {
 		if (isGameLoaded) loadInputStyles(gameData)
+		// eslint-disable-next-line
 	}, [gameData.game.word, isGameLoaded])
 
 	return (
