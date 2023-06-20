@@ -14,6 +14,7 @@ export const useLocalStorage = <T>(key: string, initialValue: T): UseLocalStorag
 
 	useEffect(() => {
 		localStorage.setItem(key, JSON.stringify(storedValue))
+		// eslint-disable-next-line
 	}, [storedValue])
 
 	return [storedValue, setValue] as UseLocalStorageReturnType<T>
