@@ -105,7 +105,7 @@ const Board = (props: any) => {
 
 			userGuesses[rowIndex][colIndex] = ""
 			nextInput = document.getElementById(`${rowIndex}-${colIndex - 1}`) as HTMLInputElement
-		} else if (e.key === "Enter" && userGuesses[rowIndex][colIndex] != "" && colIndex == gameConfig.INPUT_COLS - 1) {
+		} else if (e.key === "Enter" && userGuesses[rowIndex][colIndex] !== "" && colIndex === gameConfig.INPUT_COLS - 1) {
 			document.getElementById(`${rowIndex + 1}-0`)?.focus()
 			checkUserGuess(rowIndex)
 			return
@@ -120,12 +120,11 @@ const Board = (props: any) => {
 
 	useEffect(() => {
 		loadGame(false)
-		// console.log(calculateFinishedGameScore(gameData))
 	}, [])
 
 	useEffect(() => {
 		if (isGameLoaded) loadInputStyles(gameData)
-	}, [gameData.game.word, isGameLoaded])
+	}, [gameData, isGameLoaded])
 
 	return (
 		<div className='board__container'>
@@ -145,18 +144,16 @@ const Board = (props: any) => {
 					{gameData.game.userTries.map((row, rowIndex) => (
 						<div className='board__row' key={rowIndex}>
 							{row.map((col, colIndex) => (
-								<>
-									<input
-										type='text'
-										className='board__col'
-										id={`${rowIndex}-${colIndex}`}
-										key={`${rowIndex}-${colIndex}`}
-										value={gameData.game.userTries[rowIndex][colIndex]}
-										maxLength={1}
-										onChange={() => {}}
-										onKeyDown={(e) => handleKeyDown(e, colIndex, rowIndex)}
-									/>
-								</>
+								<input
+									type='text'
+									className='board__col'
+									id={`${rowIndex}-${colIndex}`}
+									key={`${rowIndex}-${colIndex}`}
+									value={gameData.game.userTries[rowIndex][colIndex]}
+									maxLength={1}
+									onChange={() => {}}
+									onKeyDown={(e) => handleKeyDown(e, colIndex, rowIndex)}
+								/>
 							))}
 						</div>
 					))}
